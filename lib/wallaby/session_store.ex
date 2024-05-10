@@ -36,7 +36,7 @@ defmodule Wallaby.SessionStore do
     Process.flag(:trap_exit, true)
     tid = :ets.new(name, opts)
 
-    if Application.fetch_env!(:wallaby, :production) do
+    if !Application.fetch_env!(:wallaby, :production) do
       Application.ensure_all_started(:ex_unit)
 
       ExUnit.after_suite(fn _ ->
